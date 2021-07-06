@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="Lits">
+    <description>BGSU LITS PHP Code Sniffer configuration.</description>
+    <rule ref="PSR12"/>
+
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+    <rule ref="Generic.CodeAnalysis.EmptyPHPStatement"/>
+    <rule ref="Generic.CodeAnalysis.EmptyStatement"/>
+    <rule ref="Generic.CodeAnalysis.ForLoopShouldBeWhileLoop"/>
+    <rule ref="Generic.CodeAnalysis.ForLoopWithTestFunctionCall"/>
+    <rule ref="Generic.CodeAnalysis.JumbledIncrementer"/>
+    <rule ref="Generic.CodeAnalysis.UnconditionalIfStatement"/>
+    <rule ref="Generic.CodeAnalysis.UnnecessaryFinalModifier"/>
+    <rule ref="Generic.CodeAnalysis.UselessOverridingMethod"/>
+    <rule ref="Generic.Commenting.Fixme"/>
+    <rule ref="Generic.Formatting.SpaceAfterCast"/>
+    <rule ref="Generic.Commenting.Todo"/>
+    <rule ref="Generic.Functions.CallTimePassByReference"/>
+    <rule ref="Generic.Metrics.CyclomaticComplexity"/>
+    <rule ref="Generic.Metrics.NestingLevel"/>
+    <rule ref="Generic.PHP.BacktickOperator"/>
+    <rule ref="Generic.PHP.CharacterBeforePHPOpeningTag"/>
+    <rule ref="Generic.PHP.DeprecatedFunctions"/>
+    <rule ref="Generic.PHP.DiscourageGoto"/>
+    <rule ref="Generic.PHP.ForbiddenFunctions"/>
+    <rule ref="Generic.PHP.NoSilencedErrors"/>
+
+    <rule ref="Squiz.Arrays.ArrayBracketSpacing"/>
+    <rule ref="Squiz.Classes.LowercaseClassKeywords"/>
+    <rule ref="Squiz.Commenting.DocCommentAlignment"/>
+    <rule ref="Squiz.Operators.ValidLogicalOperators"/>
+    <rule ref="Squiz.PHP.LowercasePHPFunctions"/>
+    <rule ref="Squiz.PHP.NonExecutableCode"/>
+    <rule ref="Squiz.Scope.MemberVarScope"/>
+    <rule ref="Squiz.Scope.MethodScope"/>
+    <rule ref="Squiz.Scope.StaticThisUsage"/>
+    <rule ref="Squiz.Strings.DoubleQuoteUsage"/>
+    <rule ref="Squiz.WhiteSpace.LanguageConstructSpacing"/>
+    <rule ref="Squiz.WhiteSpace.LogicalOperatorSpacing"/>
+    <rule ref="Squiz.WhiteSpace.ObjectOperatorSpacing">
+        <properties>
+            <property name="ignoreNewlines" value="true" />
+        </properties>
+    </rule>
+    <rule ref="Squiz.WhiteSpace.OperatorSpacing">
+        <properties>
+            <property name="ignoreNewlines" value="true" />
+        </properties>
+    </rule>
+    <rule ref="Squiz.WhiteSpace.SemicolonSpacing"/>
+
+    <config name="installed_paths" value="../../slevomat/coding-standard/"/>
+    <rule ref="SlevomatCodingStandard.Arrays.DisallowImplicitArrayCreation"/>
+    <rule ref="SlevomatCodingStandard.Arrays.MultiLineArrayEndBracketPlacement"/>
+    <rule ref="SlevomatCodingStandard.Arrays.SingleLineArrayWhitespace"/>
+    <rule ref="SlevomatCodingStandard.Arrays.TrailingArrayComma"/>
+    <rule ref="SlevomatCodingStandard.Classes.ClassConstantVisibility"/>
+    <rule ref="SlevomatCodingStandard.Classes.ClassMemberSpacing"/>
+    <rule ref="SlevomatCodingStandard.Classes.ClassStructure"/>
+    <rule ref="SlevomatCodingStandard.Classes.ConstantSpacing"/>
+    <rule ref="SlevomatCodingStandard.Classes.DisallowMultiConstantDefinition"/>
+    <rule ref="SlevomatCodingStandard.Classes.DisallowMultiPropertyDefinition"/>
+    <rule ref="SlevomatCodingStandard.Classes.DisallowLateStaticBindingForConstants"/>
+    <rule ref="SlevomatCodingStandard.Classes.EmptyLinesAroundClassBraces">
+        <properties>
+            <property name="linesCountAfterOpeningBrace" value="0"/>
+            <property name="linesCountBeforeClosingBrace" value="0"/>
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Classes.MethodSpacing"/>
+    <rule ref="SlevomatCodingStandard.Classes.ModernClassNameReference"/>
+    <rule ref="SlevomatCodingStandard.Classes.ParentCallSpacing"/>
+    <rule ref="SlevomatCodingStandard.Classes.PropertySpacing"/>
+    <rule ref="SlevomatCodingStandard.Classes.RequireMultiLineMethodSignature">
+        <properties>
+            <property name="minLineLength" value="80"/>
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Classes.RequireSingleLineMethodSignature">
+        <properties>
+            <property name="maxLineLength" value="79"/>
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Classes.SuperfluousAbstractClassNaming"/>
+    <rule ref="SlevomatCodingStandard.Classes.SuperfluousInterfaceNaming"/>
+    <rule ref="SlevomatCodingStandard.Classes.TraitUseDeclaration"/>
+    <rule ref="SlevomatCodingStandard.Classes.TraitUseSpacing">
+        <properties>
+            <property name="linesCountBeforeFirstUseWhenFirstInClass" value="0"/>
+            <property name="linesCountAfterLastUseWhenLastInClass" value="0"/>
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Classes.UselessLateStaticBinding"/>
+    <rule ref="SlevomatCodingStandard.Commenting.DocCommentSpacing"/>
+    <rule ref="SlevomatCodingStandard.Commenting.EmptyComment"/>
+    <rule ref="SlevomatCodingStandard.Commenting.RequireOneLineDocComment"/>
+    <rule ref="SlevomatCodingStandard.Commenting.RequireOneLinePropertyDocComment"/>
+    <rule ref="SlevomatCodingStandard.Commenting.UselessFunctionDocComment"/>
+    <rule ref="SlevomatCodingStandard.Commenting.UselessInheritDocComment"/>
+    <rule ref="SlevomatCodingStandard.ControlStructures.AssignmentInCondition"/>
+    <rule ref="SlevomatCodingStandard.ControlStructures.BlockControlStructureSpacing"/>
+    <rule ref="SlevomatCodingStandard.ControlStructures.DisallowContinueWithoutIntegerOperandInSwitch"/>
+    <rule ref="SlevomatCodingStandard.ControlStructures.DisallowEmpty"/>
+    <rule ref="SlevomatCodingStandard.ControlStructures.DisallowShortTernaryOperator"/>
+    <rule ref="SlevomatCodingStandard.ControlStructures.DisallowYodaComparison"/>
+    <rule ref="SlevomatCodingStandard.ControlStructures.EarlyExit">
+        <properties>
+            <property name="ignoreOneLineTrailingIf" value="true"/>
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.ControlStructures.JumpStatementsSpacing"/>
+    <rule ref="SlevomatCodingStandard.ControlStructures.LanguageConstructWithParentheses"/>
+    <rule ref="SlevomatCodingStandard.ControlStructures.NewWithParentheses"/>
+    <rule ref="SlevomatCodingStandard.ControlStructures.RequireMultiLineTernaryOperator">
+        <properties>
+            <property name="lineLengthLimit" value="79"/>
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.ControlStructures.RequireNullCoalesceOperator"/>
+    <rule ref="SlevomatCodingStandard.ControlStructures.RequireShortTernaryOperator"/>
+    <rule ref="SlevomatCodingStandard.ControlStructures.RequireTernaryOperator"/>
+    <rule ref="SlevomatCodingStandard.ControlStructures.UselessIfConditionWithReturn"/>
+    <rule ref="SlevomatCodingStandard.ControlStructures.UselessTernaryOperator"/>
+    <rule ref="SlevomatCodingStandard.Exceptions.DeadCatch"/>
+    <rule ref="SlevomatCodingStandard.Exceptions.ReferenceThrowableOnly"/>
+    <rule ref="SlevomatCodingStandard.Files.LineLength">
+        <properties>
+            <property name="lineLengthLimit" value="79"/>
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Functions.ArrowFunctionDeclaration"/>
+    <rule ref="SlevomatCodingStandard.Functions.RequireArrowFunction"/>
+    <rule ref="SlevomatCodingStandard.Functions.RequireTrailingCommaInDeclaration"/>
+    <rule ref="SlevomatCodingStandard.Functions.StrictCall"/>
+    <rule ref="SlevomatCodingStandard.Functions.UnusedInheritedVariablePassedToClosure"/>
+    <rule ref="SlevomatCodingStandard.Functions.UselessParameterDefaultValue"/>
+    <rule ref="SlevomatCodingStandard.Namespaces.AlphabeticallySortedUses">
+        <properties>
+            <property name="caseSensitive" value="true"/>
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Namespaces.DisallowGroupUse"/>
+    <rule ref="SlevomatCodingStandard.Namespaces.FullyQualifiedGlobalConstants"/>
+    <rule ref="SlevomatCodingStandard.Namespaces.FullyQualifiedGlobalFunctions"/>
+    <rule ref="SlevomatCodingStandard.Namespaces.MultipleUsesPerLine"/>
+    <rule ref="SlevomatCodingStandard.Namespaces.NamespaceDeclaration"/>
+    <rule ref="SlevomatCodingStandard.Namespaces.NamespaceSpacing"/>
+    <rule ref="SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly">
+        <properties>
+            <property name="allowFullyQualifiedGlobalClasses" value="true"/>
+            <property name="allowFullyQualifiedGlobalConstants" value="true"/>
+            <property name="allowFullyQualifiedGlobalFunctions" value="true"/>
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Namespaces.RequireOneNamespaceInFile"/>
+    <rule ref="SlevomatCodingStandard.Namespaces.UnusedUses">
+        <properties>
+            <property name="searchAnnotations" value="true"/>
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Namespaces.UseDoesNotStartWithBackslash"/>
+    <rule ref="SlevomatCodingStandard.Namespaces.UseFromSameNamespace"/>
+    <rule ref="SlevomatCodingStandard.Namespaces.UselessAlias"/>
+    <rule ref="SlevomatCodingStandard.Namespaces.UseSpacing">
+        <properties>
+            <property name="linesCountBetweenUseTypes" value="1"/>
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Operators.DisallowEqualOperators"/>
+    <rule ref="SlevomatCodingStandard.Operators.NegationOperatorSpacing"/>
+    <rule ref="SlevomatCodingStandard.Operators.RequireCombinedAssignmentOperator"/>
+    <rule ref="SlevomatCodingStandard.Operators.RequireOnlyStandaloneIncrementAndDecrementOperators"/>
+    <rule ref="SlevomatCodingStandard.Operators.SpreadOperatorSpacing"/>
+    <rule ref="SlevomatCodingStandard.PHP.DisallowDirectMagicInvokeCall"/>
+    <rule ref="SlevomatCodingStandard.PHP.OptimizedFunctionsWithoutUnpacking"/>
+    <rule ref="SlevomatCodingStandard.PHP.ReferenceSpacing"/>
+    <rule ref="SlevomatCodingStandard.PHP.RequireNowdoc"/>
+    <rule ref="SlevomatCodingStandard.PHP.ShortList"/>
+    <rule ref="SlevomatCodingStandard.PHP.TypeCast"/>
+    <rule ref="SlevomatCodingStandard.PHP.UselessParentheses"/>
+    <rule ref="SlevomatCodingStandard.PHP.UselessSemicolon"/>
+    <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
+        <properties>
+            <property name="linesCountBeforeDeclare" value="1"/>
+            <property name="spacesCountAroundEqualsSign" value="false"/>
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.TypeHints.LongTypeHints"/>
+    <rule ref="SlevomatCodingStandard.TypeHints.NullTypeHintOnLastPosition"/>
+    <rule ref="SlevomatCodingStandard.TypeHints.NullableTypeForNullDefaultValue"/>
+    <rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHint"/>
+    <rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHintSpacing"/>
+    <rule ref="SlevomatCodingStandard.TypeHints.PropertyTypeHint"/>
+    <rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHint"/>
+    <rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHintSpacing"/>
+    <rule ref="SlevomatCodingStandard.TypeHints.UselessConstantTypeHint"/>
+    <rule ref="SlevomatCodingStandard.Variables.DuplicateAssignmentToVariable"/>
+    <rule ref="SlevomatCodingStandard.Variables.UnusedVariable"/>
+    <rule ref="SlevomatCodingStandard.Variables.UselessVariable"/>
+    <rule ref="SlevomatCodingStandard.Whitespaces.DuplicateSpaces"/>
+</ruleset>
