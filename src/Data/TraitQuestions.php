@@ -4,16 +4,21 @@ declare(strict_types=1);
 
 namespace Lits\LibCal\Data;
 
+/** Supports questions added as properties to a JSON object as a collection. */
 trait TraitQuestions
 {
-    /** @var array<string,string|string[]> $questions */
+    /** @var array<string,string|string[]> $questions Questions collection. */
     public array $questions = [];
 
     /**
-     * @param string|string[] $value
+     * Add parameters that appear to be questions to the question collection.
+     *
+     * @param object $object The object using this trait.
+     * @param string $property A property name of the JSON object.
+     * @param string|string[] $value The value of the property.
      * @throws \JsonMapper_Exception
      */
-    public static function undefinedPropertyHandler(
+    final public static function undefinedPropertyHandler(
         object $object,
         string $property,
         $value
@@ -30,7 +35,12 @@ trait TraitQuestions
         }
     }
 
-    protected static function mapper(): \JsonMapper
+    /**
+     * Create a JsonMapper object with necessary configuration.
+     *
+     * @return \JsonMapper Configured to handle undefined properties.
+     */
+    final protected static function mapper(): \JsonMapper
     {
         $mapper = parent::mapper();
         $mapper->bExceptionOnUndefinedProperty = false;
@@ -42,7 +52,13 @@ trait TraitQuestions
         return $mapper;
     }
 
-    private static function isQuestion(string $property): bool
+    /**
+     * Check if the given property name appears to be a question.
+     *
+     * @param string $property A property name of the JSON object.
+     * @return bool If the name is the letter q followed by an integer.
+     */
+    final private static function isQuestion(string $property): bool
     {
         $result = \filter_var(
             $property,
@@ -53,8 +69,13 @@ trait TraitQuestions
         return $result !== false;
     }
 
-    /** @return mixed */
-    public function __get(string $property)
+    /**
+     * Magic method to handle getting a question instead of a property.
+     *
+     * @param string $property A property name of a question to get.
+     * @return string|string[]|null The question if available, otherwise null.
+     */
+    final public function __get(string $property)
     {
         if ($this->__isset($property)) {
             return $this->questions[$property];
@@ -63,21 +84,37 @@ trait TraitQuestions
         return null;
     }
 
-    public function __isset(string $property): bool
+    /**
+     * Magic method to check if a question has been set.
+     *
+     * @param string $property A property name of a question to check for.
+     * @return bool Whether the property is a question and has been set.
+     */
+    final public function __isset(string $property): bool
     {
         return self::isQuestion($property) &&
             isset($this->questions[$property]);
     }
 
-    /** @param string|string[] $value */
-    public function __set(string $property, $value): void
+    /**
+     * Magic method to set a question.
+     *
+     * @param string $property A property name of a question to set.
+     * @param string|string[] $value A value to be set.
+     */
+    final public function __set(string $property, $value): void
     {
         if (self::isQuestion($property)) {
             $this->questions[$property] = $value;
         }
     }
 
-    public function __unset(string $property): void
+    /**
+     * Magic method to unset a question.
+     *
+     * @param string $property A property name of a question to unset.
+     */
+    final public function __unset(string $property): void
     {
         if (self::isQuestion($property)) {
             unset($this->questions[$property]);

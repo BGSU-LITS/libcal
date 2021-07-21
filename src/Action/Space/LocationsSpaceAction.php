@@ -6,6 +6,7 @@ namespace Lits\LibCal\Action\Space;
 
 use Lits\LibCal\Action;
 use Lits\LibCal\Action\TraitAdminOnly;
+use Lits\LibCal\Action\TraitCache;
 use Lits\LibCal\Action\TraitDetails;
 use Lits\LibCal\Client;
 use Lits\LibCal\Data\Space\LocationSpaceData;
@@ -17,6 +18,7 @@ use Lits\LibCal\Exception\NotFoundException;
 final class LocationsSpaceAction extends Action
 {
     use TraitAdminOnly;
+    use TraitCache;
     use TraitDetails;
 
     /**
@@ -33,6 +35,14 @@ final class LocationsSpaceAction extends Action
         $uri = $this->addAdminOnly($uri);
         $uri = $this->addDetails($uri);
 
-        return LocationSpaceData::fromJsonAsArray($this->client->get($uri));
+        /** @var LocationSpaceData[] $result */
+        $result = $this->memoize(
+            $uri,
+            fn (string $uri) => LocationSpaceData::fromJsonAsArray(
+                $this->client->get($uri)
+            )
+        );
+
+        return $result;
     }
 }

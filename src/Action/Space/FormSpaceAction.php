@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Lits\LibCal\Action\Space;
 
 use Lits\LibCal\Action;
+use Lits\LibCal\Action\TraitCache;
 use Lits\LibCal\Action\TraitIdMultiple;
 use Lits\LibCal\Client;
 use Lits\LibCal\Data\Space\FormSpaceData;
@@ -15,6 +16,7 @@ use Lits\LibCal\Exception\NotFoundException;
 /** Action to get details of a space/seat booking form. */
 final class FormSpaceAction extends Action
 {
+    use TraitCache;
     use TraitIdMultiple;
 
     /**
@@ -30,6 +32,14 @@ final class FormSpaceAction extends Action
         $uri = '/' . Client::VERSION . '/space/form';
         $uri = $this->addId($uri);
 
-        return FormSpaceData::fromJsonAsArray($this->client->get($uri));
+        /** @var FormSpaceData[] $result */
+        $result = $this->memoize(
+            $uri,
+            fn (string $uri) => FormSpaceData::fromJsonAsArray(
+                $this->client->get($uri)
+            )
+        );
+
+        return $result;
     }
 }

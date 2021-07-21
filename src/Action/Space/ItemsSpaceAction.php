@@ -6,6 +6,7 @@ namespace Lits\LibCal\Action\Space;
 
 use Lits\LibCal\Action;
 use Lits\LibCal\Action\TraitAvailability;
+use Lits\LibCal\Action\TraitCache;
 use Lits\LibCal\Action\TraitIdSingle;
 use Lits\LibCal\Client;
 use Lits\LibCal\Data\Space\ItemSpaceData;
@@ -18,6 +19,7 @@ use Lits\LibCal\Exception\NotFoundException;
 final class ItemsSpaceAction extends Action
 {
     use TraitAvailability;
+    use TraitCache;
     use TraitIdSingle;
 
     public const PAGE_SIZE_MIN = 1;
@@ -71,14 +73,22 @@ final class ItemsSpaceAction extends Action
         $uri = self::addQuery($uri, 'pageIndex', $this->pageIndex);
         $uri = self::addQuery($uri, 'pageSize', $this->pageSize);
 
-        return ItemSpaceData::fromJsonAsArray($this->client->get($uri));
+        /** @var ItemSpaceData[] $result */
+        $result = $this->memoize(
+            $uri,
+            fn (string $uri) => ItemSpaceData::fromJsonAsArray(
+                $this->client->get($uri)
+            )
+        );
+
+        return $result;
     }
 
     /**
      * Set a category ID to only show spaces from this category.
      *
      * @param int $categoryId Value to set.
-     * @return self Return self for chaining.
+     * @return self A reference to this object for method chaining.
      */
     public function setCategoryId(int $categoryId): self
     {
@@ -91,7 +101,7 @@ final class ItemsSpaceAction extends Action
      * Set a zone ID to only show details for this zone.
      *
      * @param int $zoneId Value to set.
-     * @return self Return self for chaining.
+     * @return self A reference to this object for method chaining.
      */
     public function setZoneId(int $zoneId): self
     {
@@ -104,7 +114,7 @@ final class ItemsSpaceAction extends Action
      * Set to only return accessible spaces.
      *
      * @param bool $accessibleOnly Value to set, enabling by default.
-     * @return self Return self for chaining.
+     * @return self A reference to this object for method chaining.
      */
     public function setAccessibleOnly(bool $accessibleOnly = true): self
     {
@@ -117,7 +127,7 @@ final class ItemsSpaceAction extends Action
      * Set to only return Bookable As Whole spaces.
      *
      * @param bool $bookable Value to set, enabling by default.
-     * @return self Return self for chaining.
+     * @return self A reference to this object for method chaining.
      */
     public function setBookable(bool $bookable = true): self
     {
@@ -130,7 +140,7 @@ final class ItemsSpaceAction extends Action
      * Set to only return powered spaces.
      *
      * @param bool $powered Value to set, enabling by default.
-     * @return self Return self for chaining.
+     * @return self A reference to this object for method chaining.
      */
     public function setPowered(bool $powered = true): self
     {
@@ -143,7 +153,7 @@ final class ItemsSpaceAction extends Action
      * Set which page to retrieve (starting at 0 for the first page).
      *
      * @param int $pageIndex Value to set.
-     * @return self Return self for chaining.
+     * @return self A reference to this object for method chaining.
      */
     public function setPageIndex(int $pageIndex): self
     {
@@ -156,7 +166,7 @@ final class ItemsSpaceAction extends Action
      * Set how many results per page to retrieve.
      *
      * @param int $pageSize Value to set.
-     * @return self Return self for chaining.
+     * @return self A reference to this object for method chaining.
      * @throws ActionException If the page size is not between 1 and 100.
      */
     public function setPageSize(int $pageSize): self

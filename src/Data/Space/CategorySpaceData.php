@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Lits\LibCal\Data\Space;
 
 use Lits\LibCal\Data;
+use Lits\LibCal\Exception\DataException;
 
 final class CategorySpaceData extends Data
 {
@@ -17,7 +18,14 @@ final class CategorySpaceData extends Data
     /** @var ItemSpaceData[] $items */
     public ?array $items = null;
 
-    /** @return mixed */
+    /**
+     * Decode JSON.
+     *
+     * @param string $data JSON to decode.
+     * @return mixed The decoded JSON with the object or objects fixed by
+     *  making the items property always hold objects.
+     * @throws DataException
+     */
     protected static function decodeJson(string $data)
     {
         /** @var object|mixed[]|null $decoded */
@@ -40,6 +48,12 @@ final class CategorySpaceData extends Data
         return $decoded;
     }
 
+    /**
+     * Fix the items property of the specified object.
+     *
+     * @param object $object The object to fix.
+     * @return object The object with the items property fixed as objects.
+     */
     private static function fixObject(object $object): object
     {
         if (isset($object->items) && \is_array($object->items)) {
@@ -50,8 +64,11 @@ final class CategorySpaceData extends Data
     }
 
     /**
-     * @param mixed[] $items
-     * @return mixed[]
+     * Fix the items array from an object to always contain objects.
+     *
+     * @param mixed[] $items An array of an items property from an object.
+     * @return mixed[] The items fixed if necessary if the value is an
+     *  integer by creating an object with a property id of that integer.
      */
     private static function fixObjectItems(array $items): array
     {

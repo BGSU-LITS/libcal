@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Lits\LibCal\Action\Space;
 
 use Lits\LibCal\Action;
+use Lits\LibCal\Action\TraitCache;
 use Lits\LibCal\Action\TraitIdMultiple;
 use Lits\LibCal\Client;
 use Lits\LibCal\Data\Space\QuestionSpaceData;
@@ -15,6 +16,7 @@ use Lits\LibCal\Exception\NotFoundException;
 /** Action to get details of space/seat booking form questions. */
 final class QuestionSpaceAction extends Action
 {
+    use TraitCache;
     use TraitIdMultiple;
 
     /**
@@ -30,6 +32,14 @@ final class QuestionSpaceAction extends Action
         $uri = '/' . Client::VERSION . '/space/question';
         $uri = $this->addId($uri);
 
-        return QuestionSpaceData::fromJsonAsArray($this->client->get($uri));
+        /** @var QuestionSpaceData[] $result */
+        $result = $this->memoize(
+            $uri,
+            fn (string $uri) => QuestionSpaceData::fromJsonAsArray(
+                $this->client->get($uri)
+            )
+        );
+
+        return $result;
     }
 }

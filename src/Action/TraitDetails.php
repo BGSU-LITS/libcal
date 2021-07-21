@@ -13,9 +13,9 @@ trait TraitDetails
      * Set to include additional details.
      *
      * @param bool $details Value to set, enabling by default.
-     * @return self Return self for chaining.
+     * @return self A reference to this object for method chaining.
      */
-    public function setDetails(bool $details = true): self
+    final public function setDetails(bool $details = true): self
     {
         $this->details = $details;
 
@@ -28,7 +28,7 @@ trait TraitDetails
      * @param string $uri The URI to add details query to.
      * @return string The URI with added details query.
      */
-    protected function addDetails(string $uri): string
+    final protected function addDetails(string $uri): string
     {
         return self::addQuery($uri, 'details', $this->details);
     }

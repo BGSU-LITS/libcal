@@ -6,6 +6,7 @@ namespace Lits\LibCal\Action\Space;
 
 use Lits\LibCal\Action;
 use Lits\LibCal\Action\TraitAvailability;
+use Lits\LibCal\Action\TraitCache;
 use Lits\LibCal\Action\TraitDetails;
 use Lits\LibCal\Action\TraitIdMultiple;
 use Lits\LibCal\Client;
@@ -18,6 +19,7 @@ use Lits\LibCal\Exception\NotFoundException;
 final class CategorySpaceAction extends Action
 {
     use TraitAvailability;
+    use TraitCache;
     use TraitDetails;
     use TraitIdMultiple;
 
@@ -36,6 +38,14 @@ final class CategorySpaceAction extends Action
         $uri = $this->addAvailability($uri);
         $uri = $this->addDetails($uri);
 
-        return CategorySpaceData::fromJsonAsArray($this->client->get($uri));
+        /** @var CategorySpaceData[] $result */
+        $result = $this->memoize(
+            $uri,
+            fn (string $uri) => CategorySpaceData::fromJsonAsArray(
+                $this->client->get($uri)
+            )
+        );
+
+        return $result;
     }
 }

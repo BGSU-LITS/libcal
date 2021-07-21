@@ -37,7 +37,9 @@ final class PayloadReserveSpaceData extends Data
     /**
      * Get properties as a JSON object.
      *
-     * @return string JSON object.
+     * @return string JSON object with unused properties removed, date/times
+     *  specified as strings in the correct format, questions added as
+     *  properties and unexpected arrays formatted as comma separated strings.
      * @throws DataException
      */
     public function json(): string

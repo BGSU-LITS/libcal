@@ -9,6 +9,7 @@ use Lits\LibCal\Exception\DataException;
 /** Data transfer from and to JSON. */
 abstract class Data
 {
+    /** Maximum depth for the PHP json_encode() function. */
     public const JSON_DEPTH = 512;
 
     /**
@@ -27,7 +28,7 @@ abstract class Data
      * @return static Object with loaded data.
      * @throws DataException
      */
-    public static function fromArray(array $data): self
+    final public static function fromArray(array $data): self
     {
         try {
             $mapper = static::mapper();
@@ -51,7 +52,7 @@ abstract class Data
      * @return static Object with loaded data.
      * @throws DataException
      */
-    public static function fromJson(string $data): self
+    final public static function fromJson(string $data): self
     {
         $object = static::decodeJson($data);
 
@@ -97,7 +98,7 @@ abstract class Data
      * @return static[] Objects with loaded data.
      * @throws DataException
      */
-    public static function fromJsonAsArray(string $data): array
+    final public static function fromJsonAsArray(string $data): array
     {
         $array = static::decodeJson($data);
 
@@ -142,6 +143,11 @@ abstract class Data
         }
     }
 
+    /**
+     * Create a JsonMapper object with necessary configuration.
+     *
+     * @return \JsonMapper A configured JsonMapper object.
+     */
     protected static function mapper(): \JsonMapper
     {
         $mapper = new \JsonMapper();

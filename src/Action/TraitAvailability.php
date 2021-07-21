@@ -23,10 +23,10 @@ trait TraitAvailability
      * @param string|string[]|\DateTimeInterface[]|null $availability Value to
      *  set. The string "next" can be used to return availability for the next
      *  date that this item is available.
-     * @return self Return self for chaining.
+     * @return self A reference to this object for method chaining.
      * @throws ActionException If an invalid availability is specified.
      */
-    public function setAvailability($availability): self
+    final public function setAvailability($availability): self
     {
         if (!\is_null($availability)) {
             if (!\is_array($availability)) {
@@ -62,7 +62,7 @@ trait TraitAvailability
      * @param string $uri The URI to add an availability query to.
      * @return string The URI with added availability query.
      */
-    protected function addAvailability(string $uri): string
+    final protected function addAvailability(string $uri): string
     {
         return self::addQuery($uri, 'availability', $this->availability);
     }

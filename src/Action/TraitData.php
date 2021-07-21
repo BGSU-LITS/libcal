@@ -37,7 +37,7 @@ trait TraitData
      * @throws DataException
      * @throws NotFoundException
      */
-    public function postWithData(string $uri): string
+    final public function postWithData(string $uri): string
     {
         return $this->client->post(
             $uri,

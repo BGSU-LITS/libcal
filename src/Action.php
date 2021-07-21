@@ -20,8 +20,6 @@ abstract class Action
         $this->client = $client;
     }
 
-    /** @param mixed $value */
-
     /**
      * Add query string parameter to a URI.
      *
@@ -31,7 +29,7 @@ abstract class Action
      * @return string The URI with the query string parameter added, preceded
      *  by either a question mark or ampersand as necessary.
      */
-    protected static function addQuery(
+    final protected static function addQuery(
         string $uri,
         string $name,
         $value
@@ -58,7 +56,7 @@ abstract class Action
      * @return string The URI with the path parameter added, preceded by a
      *  slash as necessary.
      */
-    protected static function addParam(string $uri, $value): string
+    final protected static function addParam(string $uri, $value): string
     {
         return \rtrim($uri, '/') . '/' . (string) $value;
     }

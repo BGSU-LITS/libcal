@@ -21,7 +21,7 @@ trait TraitIdMultiple
      * @param Client $client Client to send requests to the LibCal API.
      * @param int|int[] $id The ID or IDs to retrieve.
      */
-    public function __construct(Client $client, $id)
+    final public function __construct(Client $client, $id)
     {
         parent::__construct($client);
 
@@ -38,7 +38,7 @@ trait TraitIdMultiple
      * @param string $uri The URI to add ID param to.
      * @return string The URI with added ID param.
      */
-    protected function addId(string $uri): string
+    final protected function addId(string $uri): string
     {
         return self::addParam($uri, \implode(',', $this->id));
     }

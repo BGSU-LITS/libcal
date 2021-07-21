@@ -38,7 +38,7 @@ trait TraitIdMultipleString
      * @param string $uri The URI to add ID param to.
      * @return string The URI with added ID param.
      */
-    protected function addId(string $uri): string
+    final protected function addId(string $uri): string
     {
         return self::addParam($uri, \implode(',', $this->id));
     }
