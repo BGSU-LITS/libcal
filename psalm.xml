@@ -10,6 +10,7 @@
     ignoreInternalFunctionNullReturn="false"
     resolveFromConfigFile="false"
     sealAllMethods="true"
+    strictBinaryOperands="true"
 >
     <issueHandlers>
         <PropertyNotSetInConstructor>

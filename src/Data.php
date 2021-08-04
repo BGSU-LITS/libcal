@@ -131,7 +131,7 @@ abstract class Data
             return \json_decode(
                 $data,
                 false,
-                Data::JSON_DEPTH,
+                self::JSON_DEPTH,
                 \JSON_THROW_ON_ERROR
             );
         } catch (\Throwable $exception) {

@@ -320,7 +320,8 @@ final class Client
         }
 
         if ($response->getStatusCode() !== self::HTTP_OK) {
-            $message = 'HTTP ' . $response->getStatusCode() . ' response';
+            $message = 'HTTP ' . (string) $response->getStatusCode() .
+                ' response';
 
             try {
                 $message .= self::parseJsonError(
@@ -408,7 +409,10 @@ final class Client
     {
         if (isset($json->errors)) {
             if (\is_array($json->errors)) {
-                return ': ' . \implode('; ', $json->errors);
+                /** @var string[] */
+                $errors = $json->errors;
+
+                return ': ' . \implode('; ', $errors);
             }
 
             if (\is_string($json->errors)) {

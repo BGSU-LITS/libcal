@@ -66,7 +66,9 @@ final class PayloadReserveSpaceData extends Data
                 continue;
             }
 
-            $data[$key] = \implode(', ', $data[$key]);
+            /** @var string[] */
+            $strings = $data[$key];
+            $data[$key] = \implode(', ', $strings);
         }
 
         try {
