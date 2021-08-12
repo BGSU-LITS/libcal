@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Lits\LibCal\Data;
 
+use Lits\LibCal\Data;
+
 /** Supports questions added as properties to a JSON object as a collection. */
 trait TraitQuestions
 {
@@ -24,6 +26,12 @@ trait TraitQuestions
         $value
     ): void {
         if (!self::isQuestion($property)) {
+            if (Data::$strictMapping) {
+                $object[$property] = $value;
+
+                return;
+            }
+
             throw new \JsonMapper_Exception(
                 'JSON property "' . $property . '" does not exist' .
                 ' in object of type ' . \get_class($object)

@@ -12,6 +12,9 @@ abstract class Data
     /** Maximum depth for the PHP json_encode() function. */
     public const JSON_DEPTH = 512;
 
+    /** Whether to enforce strict mapping of JSON to objects. */
+    public static bool $strictMapping = false;
+
     /**
      * Instantiate object without setting any property values.
      *
@@ -151,8 +154,9 @@ abstract class Data
     protected static function mapper(): \JsonMapper
     {
         $mapper = new \JsonMapper();
-        $mapper->bExceptionOnMissingData = true;
-        $mapper->bExceptionOnUndefinedProperty = true;
+
+        $mapper->bExceptionOnMissingData = self::$strictMapping;
+        $mapper->bExceptionOnUndefinedProperty = self::$strictMapping;
 
         return $mapper;
     }
