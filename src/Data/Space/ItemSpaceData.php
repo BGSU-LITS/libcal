@@ -17,6 +17,7 @@ final class ItemSpaceData extends Data
     public ?bool $isBookableAsWhole = null;
     public ?bool $isAccessible = null;
     public ?bool $isPowered = null;
+    public ?bool $isEventLocation = null;
     public ?int $zoneId = null;
     public ?string $zoneName = null;
     public ?int $groupId = null;
