@@ -12,6 +12,7 @@
     "require": {
         "php": "^7.4",
         "ext-date": "*",
+        "ext-pcre": "*",
         "netresearch/jsonmapper": "^4.0",
         "psr/http-client": "^1.0",
         "psr/http-client-implementation": "*",
