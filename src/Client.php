@@ -22,15 +22,6 @@ final class Client
     /** Version of the LibCal API. */
     public const VERSION = '1.1';
 
-    /** Offset time for OAuth expires_in in seconds. */
-    private const EXPIRES_IN_OFFSET = 30;
-
-    /** HTTP code for Not Found. */
-    private const HTTP_NOT_FOUND = 404;
-
-    /** HTTP code for OK. */
-    private const HTTP_OK = 200;
-
     /** Host of LibCal API. */
     private string $host;
 
@@ -235,9 +226,11 @@ final class Client
      */
     private function memoizeSet(string $key, $ttl, $value): void
     {
+        $expires_in_offset = 30;
+
         if (!\is_null($this->cache)) {
             if (\is_null($ttl) && $value instanceof TokenData) {
-                $ttl = $value->expires_in - self::EXPIRES_IN_OFFSET;
+                $ttl = $value->expires_in - $expires_in_offset;
             }
 
             try {
@@ -305,6 +298,9 @@ final class Client
      */
     private function send(HttpRequest $request): string
     {
+        $http_not_found = 404;
+        $http_ok = 200;
+
         try {
             $response = $this->client->sendRequest($request);
         } catch (HttpClientException $exception) {
@@ -315,11 +311,11 @@ final class Client
             );
         }
 
-        if ($response->getStatusCode() === self::HTTP_NOT_FOUND) {
+        if ($response->getStatusCode() === $http_not_found) {
             throw new NotFoundException();
         }
 
-        if ($response->getStatusCode() !== self::HTTP_OK) {
+        if ($response->getStatusCode() !== $http_ok) {
             $message = 'HTTP ' . (string) $response->getStatusCode() .
                 ' response';
 
