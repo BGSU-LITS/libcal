@@ -6,11 +6,14 @@ namespace Lits\LibCal\Action;
 
 trait TraitAdminOnly
 {
-    /** Include admin-only results in your request. */
+    /**
+     * Flag to indicate you want admin-only locations included in your
+     * request.
+     */
     public ?bool $admin_only = null;
 
     /**
-     * Set to include admin-only results in your request.
+     * Set to indicate you want admin-only categories included in your request.
      *
      * @param bool $admin_only Value to set, enabling by default.
      * @return self A reference to this object for method chaining.
@@ -23,10 +26,10 @@ trait TraitAdminOnly
     }
 
     /**
-     * Add admin_only param to a URI.
+     * Add admin_only query param to a URI.
      *
-     * @param string $uri The URI to add admin_only query to.
-     * @return string The URI with added admin_only query.
+     * @param string $uri The URI to add query param to.
+     * @return string The URI with added query param.
      */
     final protected function addAdminOnly(string $uri): string
     {

@@ -12,6 +12,9 @@ final class ZoneSpaceData extends Data
     public string $name;
     public ?string $description = null;
 
-    /** @var int[] $itemIds */
-    public array $itemIds;
+    /** @var int[]|null $itemIds */
+    public ?array $itemIds = null;
+
+    /** @var UtilizationItemSpaceData[]|null $spaces */
+    public ?array $spaces = null;
 }

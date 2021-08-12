@@ -7,45 +7,55 @@ namespace Lits\LibCal\Action\Space;
 use Lits\LibCal\Action;
 use Lits\LibCal\Action\TraitAvailability;
 use Lits\LibCal\Action\TraitCache;
-use Lits\LibCal\Action\TraitIdMultiple;
+use Lits\LibCal\Action\TraitIdSingle;
 use Lits\LibCal\Client;
-use Lits\LibCal\Data\Space\ItemSpaceData;
+use Lits\LibCal\Data\Space\SeatSpaceData;
 use Lits\LibCal\Exception\ClientException;
 use Lits\LibCal\Exception\DataException;
 use Lits\LibCal\Exception\NotFoundException;
 
 /**
- * Action to get information and availability details of a space in your
+ * Action to get information and availability details of a seat in your
  * system.
  */
-final class ItemSpaceAction extends Action
+final class SeatSpaceAction extends Action
 {
     use TraitAvailability;
     use TraitCache;
-    use TraitIdMultiple;
+    use TraitIdSingle;
 
     /**
      * Send request to the LibCal API.
      *
-     * @return ItemSpaceData[] List of response data.
+     * @return SeatSpaceData List of response data.
      * @throws ClientException
      * @throws DataException
      * @throws NotFoundException
      */
-    public function send(): array
+    public function send(): SeatSpaceData
     {
-        $uri = '/' . Client::VERSION . '/space/item';
+        $uri = '/api/' . Client::VERSION . '/space/seat';
         $uri = $this->addId($uri);
         $uri = $this->addAvailability($uri);
 
-        /** @var ItemSpaceData[] $result */
+        /** @var SeatSpaceData $result */
         $result = $this->memoize(
             $uri,
-            fn (string $uri) => ItemSpaceData::fromJsonAsArray(
+            fn (string $uri) => SeatSpaceData::fromJson(
                 $this->client->get($uri)
             )
         );
 
         return $result;
+    }
+
+    /**
+     * Do not allow for the string "next" as part of the availability.
+     *
+     * @return bool Always false.
+     */
+    protected function availabilityAllowNext(): bool
+    {
+        return false;
     }
 }

@@ -8,8 +8,8 @@ use Lits\LibCal\Data;
 
 final class CategoriesSpaceData extends Data
 {
-    public int $lid;
-    public string $name;
+    public ?int $lid = null;
+    public ?string $name = null;
 
     /** @var CategorySpaceData[] $categories */
     public array $categories;

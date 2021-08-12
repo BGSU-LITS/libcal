@@ -21,7 +21,7 @@ trait TraitData
      * @param Client $client Client to send requests to the LibCal API.
      * @param Data $data The data to post.
      */
-    public function __construct(Client $client, Data $data)
+    final public function __construct(Client $client, Data $data)
     {
         parent::__construct($client);
 

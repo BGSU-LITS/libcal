@@ -14,7 +14,10 @@ use Lits\LibCal\Exception\ClientException;
 use Lits\LibCal\Exception\DataException;
 use Lits\LibCal\Exception\NotFoundException;
 
-/** Action to list public and private space/seat locations from your system. */
+/**
+ * Action to get a list of public and private space/seat locations from your
+ * system.
+ */
 final class LocationsSpaceAction extends Action
 {
     use TraitAdminOnly;

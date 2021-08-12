@@ -10,13 +10,18 @@ use Lits\LibCal\Exception\DataException;
 final class CategorySpaceData extends Data
 {
     public int $cid;
+    public ?string $error = null;
     public ?string $name = null;
-    public int $formid;
-    public bool $public;
+    public ?string $nickname_label = null;
+    public ?int $formid = null;
+    public ?bool $public = null;
     public ?bool $admin_only = null;
 
     /** @var ItemSpaceData[] $items */
     public ?array $items = null;
+
+    /** @var CategorySpaceSpaceData[] $spaces */
+    public ?array $spaces = null;
 
     /**
      * Decode JSON.

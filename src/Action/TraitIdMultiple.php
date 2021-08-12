@@ -8,18 +8,14 @@ use Lits\LibCal\Client;
 
 trait TraitIdMultiple
 {
-    /**
-     * The IDs to retrieve.
-     *
-     * @var int[] $id
-     */
+    /** @var int[] $id The ids to retrieve. */
     public array $id;
 
     /**
      * Instantiate object with dependencies and options.
      *
      * @param Client $client Client to send requests to the LibCal API.
-     * @param int|int[] $id The ID or IDs to retrieve.
+     * @param int|int[] $id The id or list of ids to retrieve.
      */
     final public function __construct(Client $client, $id)
     {
@@ -33,10 +29,10 @@ trait TraitIdMultiple
     }
 
     /**
-     * Add ID param to a URI.
+     * Add id param to a URI.
      *
-     * @param string $uri The URI to add ID param to.
-     * @return string The URI with added ID param.
+     * @param string $uri The URI to add param to.
+     * @return string The URI with added param.
      */
     final protected function addId(string $uri): string
     {

@@ -6,6 +6,7 @@ namespace Lits\LibCal\Action\Space;
 
 use Lits\LibCal\Action;
 use Lits\LibCal\Action\TraitCache;
+use Lits\LibCal\Action\TraitFormAnswers;
 use Lits\LibCal\Action\TraitIdMultipleString;
 use Lits\LibCal\Client;
 use Lits\LibCal\Data\Space\BookingSpaceData;
@@ -17,10 +18,8 @@ use Lits\LibCal\Exception\NotFoundException;
 final class BookingSpaceAction extends Action
 {
     use TraitCache;
+    use TraitFormAnswers;
     use TraitIdMultipleString;
-
-    /** Include custom form answers in your request. */
-    public ?bool $formAnswers = null;
 
     /**
      * Send request to the LibCal API.
@@ -34,7 +33,7 @@ final class BookingSpaceAction extends Action
     {
         $uri = '/' . Client::VERSION . '/space/booking';
         $uri = $this->addId($uri);
-        $uri = self::addQuery($uri, 'formAnswers', $this->formAnswers);
+        $uri = $this->addFormAnswers($uri);
 
         /** @var BookingSpaceData[] $result */
         $result = $this->memoize(
@@ -45,18 +44,5 @@ final class BookingSpaceAction extends Action
         );
 
         return $result;
-    }
-
-    /**
-     * Set to include custom form answers in your request.
-     *
-     * @param bool $formAnswers Value to set, enabling by default.
-     * @return self A reference to this object for method chaining.
-     */
-    public function setFormAnswers(bool $formAnswers = true): self
-    {
-        $this->formAnswers = $formAnswers;
-
-        return $this;
     }
 }

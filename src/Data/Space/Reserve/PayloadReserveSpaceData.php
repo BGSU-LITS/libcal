@@ -24,15 +24,15 @@ final class PayloadReserveSpaceData extends Data
     /** @required */
     public string $email;
 
-    public ?string $nickname = null;
-    public ?bool $adminbooking = null;
-    public ?bool $test = null;
-
     /**
      * @var BookingReserveSpaceData[] $bookings
      * @required
      */
     public array $bookings;
+
+    public ?string $nickname = null;
+    public ?bool $adminbooking = null;
+    public ?bool $test = null;
 
     /**
      * Get properties as a JSON object.

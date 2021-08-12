@@ -6,11 +6,11 @@ namespace Lits\LibCal\Action;
 
 trait TraitDetails
 {
-    /** Include additional details. */
+    /** Flag to indicate you want additional details. */
     public ?bool $details = null;
 
     /**
-     * Set to include additional details.
+     * Set to indicate you want additional details.
      *
      * @param bool $details Value to set, enabling by default.
      * @return self A reference to this object for method chaining.
@@ -23,10 +23,10 @@ trait TraitDetails
     }
 
     /**
-     * Add details param to a URI.
+     * Add details query param to a URI.
      *
-     * @param string $uri The URI to add details query to.
-     * @return string The URI with added details query.
+     * @param string $uri The URI to add query param to.
+     * @return string The URI with added query param.
      */
     final protected function addDetails(string $uri): string
     {

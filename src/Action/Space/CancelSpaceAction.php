@@ -12,7 +12,7 @@ use Lits\LibCal\Exception\ClientException;
 use Lits\LibCal\Exception\DataException;
 use Lits\LibCal\Exception\NotFoundException;
 
-/** Action to book spaces/seats in your system. */
+/** Action to cancel a space/seat booking. */
 final class CancelSpaceAction extends Action
 {
     use TraitIdMultipleString;

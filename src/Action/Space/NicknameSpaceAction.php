@@ -5,43 +5,43 @@ declare(strict_types=1);
 namespace Lits\LibCal\Action\Space;
 
 use Lits\LibCal\Action;
-use Lits\LibCal\Action\TraitAvailability;
 use Lits\LibCal\Action\TraitCache;
+use Lits\LibCal\Action\TraitDate;
 use Lits\LibCal\Action\TraitIdMultiple;
 use Lits\LibCal\Client;
-use Lits\LibCal\Data\Space\ItemSpaceData;
+use Lits\LibCal\Data\Space\CategoriesSpaceData;
 use Lits\LibCal\Exception\ClientException;
 use Lits\LibCal\Exception\DataException;
 use Lits\LibCal\Exception\NotFoundException;
 
 /**
- * Action to get information and availability details of a space in your
- * system.
+ * Action to get spaces/seats confirmed bookings, returning the Public
+ * Nicknames for a given date.
  */
-final class ItemSpaceAction extends Action
+final class NicknameSpaceAction extends Action
 {
-    use TraitAvailability;
     use TraitCache;
+    use TraitDate;
     use TraitIdMultiple;
 
     /**
      * Send request to the LibCal API.
      *
-     * @return ItemSpaceData[] List of response data.
+     * @return CategoriesSpaceData[] List of response data.
      * @throws ClientException
      * @throws DataException
      * @throws NotFoundException
      */
     public function send(): array
     {
-        $uri = '/' . Client::VERSION . '/space/item';
+        $uri = '/' . Client::VERSION . '/space/nickname';
         $uri = $this->addId($uri);
-        $uri = $this->addAvailability($uri);
+        $uri = $this->addDate($uri);
 
-        /** @var ItemSpaceData[] $result */
+        /** @var CategoriesSpaceData[] $result */
         $result = $this->memoize(
             $uri,
-            fn (string $uri) => ItemSpaceData::fromJsonAsArray(
+            fn (string $uri) => CategoriesSpaceData::fromJsonAsArray(
                 $this->client->get($uri)
             )
         );
