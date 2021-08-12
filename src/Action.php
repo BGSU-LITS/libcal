@@ -26,24 +26,29 @@ abstract class Action
      * @param string $uri URI to add query string parameter to.
      * @param string $name Name of the query string parameter.
      * @param mixed $value Value of the query string parameter.
+     * @param bool $allowNull Whether null parameters should still be added.
      * @return string The URI with the query string parameter added, preceded
      *  by either a question mark or ampersand as necessary.
      */
     final protected static function addQuery(
         string $uri,
         string $name,
-        $value
+        $value,
+        bool $allowNull = false
     ): string {
-        if (\is_null($value)) {
+        if (!$allowNull && \is_null($value)) {
             return $uri;
         }
 
-        if (\is_bool($value)) {
-            $value = $value ? '1' : '0';
-        }
+        $uri .= (\strpos($uri, '?') === false ? '?' : '&') . $name;
 
-        $uri .= \strpos($uri, '?') === false ? '?' : '&';
-        $uri .= $name . '=' . (string) $value;
+        if (!\is_null($value)) {
+            if (\is_bool($value)) {
+                $value = $value ? '1' : '0';
+            }
+
+            $uri .= '=' . (string) $value;
+        }
 
         return $uri;
     }
