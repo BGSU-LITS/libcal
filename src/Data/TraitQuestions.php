@@ -26,8 +26,9 @@ trait TraitQuestions
         $value
     ): void {
         if (!self::isQuestion($property)) {
-            if (Data::$strictMapping) {
-                $object[$property] = $value;
+            if (!Data::$strictMapping) {
+                /** @phpstan-ignore-next-line */
+                $object->$property = $value;
 
                 return;
             }
