@@ -22,6 +22,7 @@ final class BookingSpaceData extends Data
     public string $firstName;
     public string $lastName;
     public string $email;
+    public string $account;
     public string $status;
     public string $location_name;
     public string $category_name;
