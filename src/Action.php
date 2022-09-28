@@ -11,21 +11,11 @@ abstract class Action
     protected Client $client;
 
     /**
-     * Instantiate object with dependencies.
-     *
-     * @param Client $client Client to send requests to the LibCal API.
-     */
-    public function __construct(Client $client)
-    {
-        $this->client = $client;
-    }
-
-    /**
      * Add query string parameter to a URI.
      *
      * @param string $uri URI to add query string parameter to.
      * @param string $name Name of the query string parameter.
-     * @param mixed $value Value of the query string parameter.
+     * @param scalar|null $value Value of the query string parameter.
      * @param bool $allowNull Whether null parameters should still be added.
      * @return string The URI with the query string parameter added, preceded
      *  by either a question mark or ampersand as necessary.
@@ -57,12 +47,22 @@ abstract class Action
      * Add path parameter to a URI.
      *
      * @param string $uri URI to add path parameter to.
-     * @param mixed $value Value of the path parameter.
+     * @param scalar $value Value of the path parameter.
      * @return string The URI with the path parameter added, preceded by a
      *  slash as necessary.
      */
     final protected static function addParam(string $uri, $value): string
     {
         return \rtrim($uri, '/') . '/' . (string) $value;
+    }
+
+    /**
+     * Instantiate object with dependencies.
+     *
+     * @param Client $client Client to send requests to the LibCal API.
+     */
+    public function __construct(Client $client)
+    {
+        $this->client = $client;
     }
 }

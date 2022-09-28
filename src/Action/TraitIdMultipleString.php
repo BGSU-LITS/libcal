@@ -12,6 +12,17 @@ trait TraitIdMultipleString
     public array $id;
 
     /**
+     * Add id param to a URI.
+     *
+     * @param string $uri The URI to add param to.
+     * @return string The URI with added param.
+     */
+    final protected function addId(string $uri): string
+    {
+        return self::addParam($uri, \implode(',', $this->id));
+    }
+
+    /**
      * Instantiate object with dependencies and options.
      *
      * @param Client $client Client to send requests to the LibCal API.
@@ -26,16 +37,5 @@ trait TraitIdMultipleString
         }
 
         $this->id = $id;
-    }
-
-    /**
-     * Add id param to a URI.
-     *
-     * @param string $uri The URI to add param to.
-     * @return string The URI with added param.
-     */
-    final protected function addId(string $uri): string
-    {
-        return self::addParam($uri, \implode(',', $this->id));
     }
 }

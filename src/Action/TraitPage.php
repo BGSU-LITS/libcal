@@ -21,6 +21,28 @@ trait TraitPage
     public ?int $pageSize = null;
 
     /**
+     * Add pageIndex query param to a URI.
+     *
+     * @param string $uri The URI to add query param to.
+     * @return string The URI with added query param.
+     */
+    final protected function addPageIndex(string $uri): string
+    {
+        return self::addQuery($uri, 'pageIndex', $this->pageIndex);
+    }
+
+    /**
+     * Add pageSize query param to a URI.
+     *
+     * @param string $uri The URI to add query param to.
+     * @return string The URI with added query param.
+     */
+    final protected function addPageSize(string $uri): string
+    {
+        return self::addQuery($uri, 'pageSize', $this->pageSize);
+    }
+
+    /**
      * For results pagination, set which page to retrieve (starting at 0 for
      * the first page).
      *
@@ -56,27 +78,5 @@ trait TraitPage
         $this->pageSize = $pageSize;
 
         return $this;
-    }
-
-    /**
-     * Add pageIndex query param to a URI.
-     *
-     * @param string $uri The URI to add query param to.
-     * @return string The URI with added query param.
-     */
-    final protected function addPageIndex(string $uri): string
-    {
-        return self::addQuery($uri, 'pageIndex', $this->pageIndex);
-    }
-
-    /**
-     * Add pageSize query param to a URI.
-     *
-     * @param string $uri The URI to add query param to.
-     * @return string The URI with added query param.
-     */
-    final protected function addPageSize(string $uri): string
-    {
-        return self::addQuery($uri, 'pageSize', $this->pageSize);
     }
 }

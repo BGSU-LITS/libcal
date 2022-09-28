@@ -16,6 +16,33 @@ abstract class Data
     public static bool $strictMapping = false;
 
     /**
+     * Create array of objects with values from an array of JSON objects.
+     *
+     * @param string $data JSON array of objects to load.
+     * @return static[] Objects with loaded data.
+     * @throws DataException
+     */
+    final public static function fromJsonAsArray(string $data): array
+    {
+        $array = static::decodeJson($data);
+
+        if (!\is_array($array)) {
+            throw new DataException('Specified JSON is not an array');
+        }
+
+        try {
+            /** @var static[] */
+            return static::mapper()->mapArray($array, [], static::class);
+        } catch (\Throwable $exception) {
+            throw new DataException(
+                'Data could not be loaded to object properties',
+                0,
+                $exception
+            );
+        }
+    }
+
+    /**
      * Instantiate object without setting any property values.
      *
      * Note: Parameters without default values will be left uninitialized.
@@ -88,33 +115,6 @@ abstract class Data
         } catch (\Throwable $exception) {
             throw new DataException(
                 'JSON could not be encoded',
-                0,
-                $exception
-            );
-        }
-    }
-
-    /**
-     * Create array of objects with values from an array of JSON objects.
-     *
-     * @param string $data JSON array of objects to load.
-     * @return static[] Objects with loaded data.
-     * @throws DataException
-     */
-    final public static function fromJsonAsArray(string $data): array
-    {
-        $array = static::decodeJson($data);
-
-        if (!\is_array($array)) {
-            throw new DataException('Specified JSON is not an array');
-        }
-
-        try {
-            /** @var static[] */
-            return static::mapper()->mapArray($array, [], static::class);
-        } catch (\Throwable $exception) {
-            throw new DataException(
-                'Data could not be loaded to object properties',
                 0,
                 $exception
             );

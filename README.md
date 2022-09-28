@@ -101,6 +101,9 @@ $locations = $client->space()->locations()->cache()->send();
 
 It is recommended to consult your Simple Cache client's documentation on how to best set up the cache to preserve entries between processes.
 
+## Limitations
+This client currently only implements the Spaces/Seats endpoints under `/space`.
+
 ## Related Projects
 [An application that provides a public interface for space booking](https://github.com/bgsu-lits/book) using this library is also available from the BGSU University Libraries.
 

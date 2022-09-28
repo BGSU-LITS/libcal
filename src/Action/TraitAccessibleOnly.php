@@ -10,6 +10,17 @@ trait TraitAccessibleOnly
     public ?bool $accessibleOnly = null;
 
     /**
+     * Add accessibleOnly query param to a URI.
+     *
+     * @param string $uri The URI to add query param to.
+     * @return string The URI with added query param.
+     */
+    final protected function addAccessibleOnly(string $uri): string
+    {
+        return self::addQuery($uri, 'accessibleOnly', $this->accessibleOnly);
+    }
+
+    /**
      * Set to only return accessible spaces.
      *
      * @param bool $accessibleOnly Value to set, enabling by default.
@@ -20,16 +31,5 @@ trait TraitAccessibleOnly
         $this->accessibleOnly = $accessibleOnly;
 
         return $this;
-    }
-
-    /**
-     * Add accessibleOnly query param to a URI.
-     *
-     * @param string $uri The URI to add query param to.
-     * @return string The URI with added query param.
-     */
-    final protected function addAccessibleOnly(string $uri): string
-    {
-        return self::addQuery($uri, 'accessibleOnly', $this->accessibleOnly);
     }
 }

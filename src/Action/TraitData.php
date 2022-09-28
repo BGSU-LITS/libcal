@@ -16,19 +16,6 @@ trait TraitData
     public Data $data;
 
     /**
-     * Instantiate object with dependencies and options.
-     *
-     * @param Client $client Client to send requests to the LibCal API.
-     * @param Data $data The data to post.
-     */
-    final public function __construct(Client $client, Data $data)
-    {
-        parent::__construct($client);
-
-        $this->data = $data;
-    }
-
-    /**
      * Post to URI with the predefined data.
      *
      * @param string $uri The URI to post to.
@@ -43,5 +30,18 @@ trait TraitData
             $uri,
             $this->data
         );
+    }
+
+    /**
+     * Instantiate object with dependencies and options.
+     *
+     * @param Client $client Client to send requests to the LibCal API.
+     * @param Data $data The data to post.
+     */
+    final public function __construct(Client $client, Data $data)
+    {
+        parent::__construct($client);
+
+        $this->data = $data;
     }
 }

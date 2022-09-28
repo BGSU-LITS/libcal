@@ -94,8 +94,7 @@ final class SpaceAction extends Action
     }
 
     /**
-     * Get information and availability details of an equipment item in your
-     * system.
+     * Get information and availability details of an item in your system.
      *
      * @param int|int[] $id An item id or list of item ids to retrieve.
      * @return ItemSpaceAction Action to be sent.
@@ -106,8 +105,7 @@ final class SpaceAction extends Action
     }
 
     /**
-     * Get information and availability details of equipment items in your
-     * system.
+     * Get information and availability details of items in your system.
      *
      * @param int $id The location id to retrieve.
      * @return ItemsSpaceAction Action to be sent.

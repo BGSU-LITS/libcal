@@ -33,17 +33,21 @@ trait TraitAvailability
                 $availability = [$availability];
             }
 
+            $filter = [];
+
             foreach ($availability as $key => $value) {
                 if ($value instanceof \DateTimeInterface) {
-                    $availability[$key] = $value->format('Y-m-d');
+                    $value = $value->format('Y-m-d');
                 }
+
+                $filter[$key] = $value;
             }
 
             $regexp = '/^(\d{4}-\d{2}-\d{2}(,\d{4}-\d{2}-\d{2})?' .
                 ($this->availabilityAllowNext() ? '|next' : '') . ')$/';
 
             $availability = \filter_var(
-                \implode(',', $availability),
+                \implode(',', $filter),
                 \FILTER_VALIDATE_REGEXP,
                 ['options' => ['regexp' => $regexp]]
             );
