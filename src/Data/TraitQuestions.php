@@ -67,7 +67,7 @@ trait TraitQuestions
      * @param string $property A property name of the JSON object.
      * @return bool If the name is the letter q followed by an integer.
      */
-    final private static function isQuestion(string $property): bool
+    private static function isQuestion(string $property): bool
     {
         $result = \filter_var(
             $property,
