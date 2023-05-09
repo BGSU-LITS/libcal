@@ -16,6 +16,9 @@ final class CategorySpaceData extends Data
     public ?int $formid = null;
     public ?bool $public = null;
     public ?bool $admin_only = null;
+    public ?bool $google = null;
+    public ?string $termsAndConditions = null;
+    public ?string $description = null;
 
     /** @var ItemSpaceData[] $items */
     public ?array $items = null;

@@ -7,6 +7,7 @@ namespace Lits\LibCal\Action\Space;
 use Lits\LibCal\Action;
 use Lits\LibCal\Action\TraitAdminOnly;
 use Lits\LibCal\Action\TraitCache;
+use Lits\LibCal\Action\TraitDetails;
 use Lits\LibCal\Action\TraitIdMultiple;
 use Lits\LibCal\Client;
 use Lits\LibCal\Data\Space\CategoriesSpaceData;
@@ -19,6 +20,7 @@ final class CategoriesSpaceAction extends Action
 {
     use TraitAdminOnly;
     use TraitCache;
+    use TraitDetails;
     use TraitIdMultiple;
 
     /**
@@ -34,6 +36,7 @@ final class CategoriesSpaceAction extends Action
         $uri = '/' . Client::VERSION . '/space/categories';
         $uri = $this->addId($uri);
         $uri = $this->addAdminOnly($uri);
+        $uri = $this->addDetails($uri);
 
         /** @var CategoriesSpaceData[] $result */
         $result = $this->memoize(

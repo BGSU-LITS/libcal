@@ -60,6 +60,18 @@ final class BookingsSpaceAction extends Action
      */
     public ?int $page = null;
 
+    /** Flag to include tentative bookings. */
+    public ?bool $include_tentative = null;
+
+    /** Flag to include canceled bookings. */
+    public ?bool $include_cancel = null;
+
+    /**
+     * Flag to include integration bookings such as Outlook & Google Sync
+     * bookings.
+     */
+    public ?bool $include_remote = null;
+
     /**
      * Send request to the LibCal API.
      *
@@ -81,6 +93,15 @@ final class BookingsSpaceAction extends Action
         $uri = self::addQuery($uri, 'limit', $this->limit);
         $uri = self::addQuery($uri, 'page', $this->page);
         $uri = $this->addFormAnswers($uri);
+
+        $uri = self::addQuery(
+            $uri,
+            'include_tentative',
+            $this->include_tentative
+        );
+
+        $uri = self::addQuery($uri, 'include_cancel', $this->include_cancel);
+        $uri = self::addQuery($uri, 'include_remote', $this->include_remote);
 
         /** @var BookingSpaceData[] $result */
         $result = $this->memoize(
@@ -243,6 +264,45 @@ final class BookingsSpaceAction extends Action
         }
 
         $this->page = $page;
+
+        return $this;
+    }
+
+    /**
+     * Set to include tentative bookings.
+     *
+     * @param bool $include_tentative Value to set, enabling by default.
+     * @return self A reference to this object for method chaining.
+     */
+    public function setIncludeTentative(bool $include_tentative = true): self
+    {
+        $this->include_tentative = $include_tentative;
+
+        return $this;
+    }
+
+    /**
+     * Set to include canceled bookings.
+     *
+     * @param bool $include_cancel Value to set, enabling by default.
+     * @return self A reference to this object for method chaining.
+     */
+    public function setIncludeCancel(bool $include_cancel = true): self
+    {
+        $this->include_cancel = $include_cancel;
+
+        return $this;
+    }
+
+    /**
+     * Set to include remote bookings.
+     *
+     * @param bool $include_remote Value to set, enabling by default.
+     * @return self A reference to this object for method chaining.
+     */
+    public function setIncludeRemote(bool $include_remote = true): self
+    {
+        $this->include_remote = $include_remote;
 
         return $this;
     }

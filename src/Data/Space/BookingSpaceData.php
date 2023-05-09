@@ -12,6 +12,7 @@ final class BookingSpaceData extends Data
     use TraitQuestions;
 
     public string $bookId;
+    public int $id;
     public int $eid;
     public int $cid;
     public int $lid;

@@ -33,6 +33,12 @@ final class SeatsSpaceAction extends Action
     use TraitPowered;
     use TraitZoneId;
 
+    /** A space id to only show details for this space. */
+    public ?int $spaceId = null;
+
+    /** A seat id to only show details for this seat. */
+    public ?int $seatId = null;
+
     /**
      * Send request to the LibCal API.
      *
@@ -52,6 +58,8 @@ final class SeatsSpaceAction extends Action
         $uri = $this->addPowered($uri);
         $uri = $this->addPageIndex($uri);
         $uri = $this->addPageSize($uri);
+        $uri = self::addQuery($uri, 'spaceId', $this->spaceId);
+        $uri = self::addQuery($uri, 'seatId', $this->seatId);
 
         /** @var SeatSpaceData[] $result */
         $result = $this->memoize(
@@ -62,6 +70,33 @@ final class SeatsSpaceAction extends Action
         );
 
         return $result;
+    }
+
+    /**
+     * Set a space ID to only show details for this space.
+     *
+     * @param int $spaceId Value to set. If used with a seatId, the spaceId
+     *  will be ignored.
+     * @return self A reference to this object for method chaining.
+     */
+    public function setSpaceId(int $spaceId): self
+    {
+        $this->spaceId = $spaceId;
+
+        return $this;
+    }
+
+    /**
+     * Set a seat ID to only show details for this seat.
+     *
+     * @param int $seatId Value to set.
+     * @return self A reference to this object for method chaining.
+     */
+    public function setSeatId(int $seatId): self
+    {
+        $this->seatId = $seatId;
+
+        return $this;
     }
 
     /**

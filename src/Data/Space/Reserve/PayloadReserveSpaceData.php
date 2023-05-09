@@ -31,6 +31,7 @@ final class PayloadReserveSpaceData extends Data
     public array $bookings;
 
     public ?string $nickname = null;
+    public ?float $cost = null;
     public ?bool $adminbooking = null;
     public ?bool $test = null;
 

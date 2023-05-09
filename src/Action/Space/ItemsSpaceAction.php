@@ -15,6 +15,7 @@ use Lits\LibCal\Action\TraitPowered;
 use Lits\LibCal\Action\TraitZoneId;
 use Lits\LibCal\Client;
 use Lits\LibCal\Data\Space\ItemSpaceData;
+use Lits\LibCal\Exception\ActionException;
 use Lits\LibCal\Exception\ClientException;
 use Lits\LibCal\Exception\DataException;
 use Lits\LibCal\Exception\NotFoundException;
@@ -33,6 +34,12 @@ final class ItemsSpaceAction extends Action
     use TraitPage;
     use TraitPowered;
     use TraitZoneId;
+
+    /**
+     * Sets which items to be returned: "public", "private" or "admin_only".
+     * Default: "public".
+     */
+    public ?string $visibility = null;
 
     /** A flag to only return Bookable As Whole spaces. */
     public ?bool $bookable = null;
@@ -57,6 +64,7 @@ final class ItemsSpaceAction extends Action
         $uri = $this->addAvailability($uri);
         $uri = $this->addPageIndex($uri);
         $uri = $this->addPageSize($uri);
+        $uri = self::addQuery($uri, 'visibility', $this->visibility);
 
         /** @var ItemSpaceData[] $result */
         $result = $this->memoize(
@@ -67,6 +75,34 @@ final class ItemsSpaceAction extends Action
         );
 
         return $result;
+    }
+
+    /**
+     * Sets which items to be returned.
+     *
+     * @param string $visibility Can be "public", "private" or "admin_only".
+     *   If you provide a "categoryId" then this option is ignored and all
+     *   items for the "categoryId" will be returned.
+     *   If you provide "private" for this option then items from both public
+     *   and private categories will be returned.
+     *   If you provide "admin_only" for this option then all items for the
+     *   location will be returned.
+     * @return self A reference to this object for method chaining.
+     * @throws ActionException If an invalid value is specified.
+     */
+    public function setVisibility(string $visibility = 'public'): self
+    {
+        $options = ['public', 'private', 'admin_only'];
+
+        if (!\in_array($visibility, $options, true)) {
+            throw new ActionException(
+                'Visibility must be one of: ' . \implode(', ', $options)
+            );
+        }
+
+        $this->visibility = $visibility;
+
+        return $this;
     }
 
     /**

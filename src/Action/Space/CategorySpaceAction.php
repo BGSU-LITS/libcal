@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Lits\LibCal\Action\Space;
 
 use Lits\LibCal\Action;
+use Lits\LibCal\Action\TraitAdminOnly;
 use Lits\LibCal\Action\TraitAvailability;
 use Lits\LibCal\Action\TraitCache;
 use Lits\LibCal\Action\TraitDetails;
@@ -18,6 +19,7 @@ use Lits\LibCal\Exception\NotFoundException;
 /** Action to get information about space/seat categories in your system. */
 final class CategorySpaceAction extends Action
 {
+    use TraitAdminOnly;
     use TraitAvailability;
     use TraitCache;
     use TraitDetails;
@@ -35,6 +37,7 @@ final class CategorySpaceAction extends Action
     {
         $uri = '/' . Client::VERSION . '/space/category';
         $uri = $this->addId($uri);
+        $uri = $this->addAdminOnly($uri);
         $uri = $this->addAvailability($uri);
         $uri = $this->addDetails($uri);
 
