@@ -10,10 +10,14 @@ trait TraitAvailability
 {
     /**
      * Either a single date, or a comma separated list of 2 dates (a start and
-     * end date).
+     * end date, max range of 31 days).
      *
      * Dates must be formatted YYYY-MM-DD. The keyword "next" can be used to
-     * return availability for the next date that this item is available.
+     * return availability for the next date that this resource is available.
+     * The keyword "next_only" can be used to return availability for the next
+     * date that this resource is available. This will only return the first
+     * timeslot that the resource is available for. Also note that this method
+     * only searches up to 10 days ahead of the current date.
      */
     public ?string $availability = null;
 
@@ -43,7 +47,7 @@ trait TraitAvailability
                 $filter[$key] = $value;
             }
 
-            $regexp = '/^(\d{4}-\d{2}-\d{2}(,\d{4}-\d{2}-\d{2})?' .
+            $regexp = '/^(\d{4}-\d{2}-\d{2}(,\d{4}-\d{2}-\d{2})?|next_only' .
                 ($this->availabilityAllowNext() ? '|next' : '') . ')$/';
 
             $availability = \filter_var(
