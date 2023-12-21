@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "php": "^7.4",
+        "php": "^7.4 | ^8.0",
         "ext-date": "*",
         "ext-pcre": "*",
         "netresearch/jsonmapper": "^4.0",
